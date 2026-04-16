@@ -1,6 +1,6 @@
-# Migration to `mini_backend` 0.2
+# Migration to `vantus` 0.2
 
-`mini_backend` `0.2.0` is a breaking macro-only release.
+`vantus` `0.2.0` is a breaking macro-only release.
 
 ## What changed
 
@@ -25,7 +25,7 @@
 ## Example migration
 
 ```rust
-use mini_backend::{
+use vantus::{
     AppConfig, Config, FrameworkError, HostBuilder, Response, Service, TextBody, module,
 };
 
@@ -45,13 +45,13 @@ struct ApiModule;
 impl ApiModule {
     fn configure_services(
         &self,
-        services: &mut mini_backend::ServiceCollection,
+        services: &mut vantus::ServiceCollection,
     ) -> Result<(), FrameworkError> {
         services.add_singleton(EchoService);
         Ok(())
     }
 
-    #[mini_backend::post("/echo")]
+    #[vantus::post("/echo")]
     fn echo(
         &self,
         service: Service<EchoService>,
