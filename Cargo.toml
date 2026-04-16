@@ -1,0 +1,36 @@
+[workspace]
+members = ["vantus_macros"]
+
+[package]
+name = "vantus"
+version = "0.2.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Macro-first async Rust web platform with typed extraction, DI, and configuration binding."
+license = "Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/DiplomaCoder-cmyk/vantus.git"
+keywords = ["web", "framework", "macros", "async", "http"]
+categories = ["web-programming::http-server", "asynchronous"]
+exclude = ["target/**", "wip/**"]
+
+
+[dependencies]
+async-trait = "0.1"
+bytes = "1"
+futures-util = "0.3"
+http-body-util = "0.1"
+hyper = { version = "1", features = ["http1", "server"] }
+hyper-util = { version = "0.1", features = ["server", "server-auto", "tokio"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+vantus_macros = { version = "0.2.0", path = "vantus_macros" }
+tokio = { version = "1", features = ["macros", "net", "rt-multi-thread", "sync", "time"] }
+tokio-util = "0.7"
+
+[dev-dependencies]
+trybuild = "1"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

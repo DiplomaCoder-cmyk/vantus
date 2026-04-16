@@ -1,0 +1,7 @@
+error[E0432]: unresolved imports `vantus::RouteDefinition`, `vantus::Router`
+ --> tests/ui/manual_api_removed.rs:1:20
+  |
+1 | use vantus::{RouteDefinition, Router};
+  |                    ^^^^^^^^^^^^^^^  ^^^^^^ no `Router` in the root
+  |                    |
+  |                    no `RouteDefinition` in the root

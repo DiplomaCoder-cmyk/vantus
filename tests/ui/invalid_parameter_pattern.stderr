@@ -1,0 +1,13 @@
+error: handler parameters must be simple identifiers
+ --> tests/ui/invalid_parameter_pattern.rs:9:22
+  |
+9 |     fn broken(&self, (value, _other): (String, String)) -> Response {
+  |                      ^^^^^^^^^^^^^^^
+
+warning: unused imports: `Response` and `get`
+ --> tests/ui/invalid_parameter_pattern.rs:1:20
+  |
+1 | use vantus::{Response, controller, get};
+  |                    ^^^^^^^^              ^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default

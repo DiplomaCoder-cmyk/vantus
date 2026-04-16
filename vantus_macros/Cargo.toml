@@ -1,0 +1,20 @@
+[package]
+name = "vantus_macros"
+version = "0.2.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Proc-macro support crate for the macro-first vantus web platform."
+license = "MIT"
+documentation = "https://docs.rs/vantus_macros"
+homepage = "https://github.com/subrata/backend_framework"
+repository = "https://github.com/subrata/backend_framework"
+keywords = ["web", "framework", "macros", "async", "http"]
+categories = ["web-programming::http-server", "development-tools::procedural-macro-helpers"]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1"
+quote = "1"
+syn = { version = "2", features = ["full", "extra-traits"] }
