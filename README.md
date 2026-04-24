@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/public/logo.png" alt="Vantus Framework logo" width="800">
+</p>
+
 # `vantus`
 
 `vantus` is a macro-first async Rust backend framework built around explicit composition, typed request extraction, and production-oriented HTTP defaults.
