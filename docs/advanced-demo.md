@@ -2,7 +2,7 @@
 
 `vantus` `0.3.0` no longer ships the older multi-module demo that relied on the removed runtime-DI model.
 
-The supported release example is [`examples/main.rs`](../examples/main.rs), which shows the current public architecture:
+The supported release example is [`examples/main.rs`](https://github.com/DiplomaCoder-cmyk/vantus/blob/main/examples/main.rs), which shows the current public architecture:
 
 - `HostBuilder` bootstrapping
 - `compose_with_config(...)` for explicit construction

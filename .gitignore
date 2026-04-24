@@ -15,3 +15,6 @@ Thumbs.db
 
 # --- Vantus Specific ---
 wip/
+/docs/node_modules/
+/docs/.vitepress/cache/
+/docs/.vitepress/dist/

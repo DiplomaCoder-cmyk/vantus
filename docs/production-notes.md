@@ -13,7 +13,7 @@
 - Install your own `tracing-subscriber` / exporter setup in the binary; the framework keeps observability explicit and does not register global tracing state.
 - Treat TLS termination, CORS, compression, and authentication as edge concerns for now. Put them in middleware or a front proxy rather than assuming built-in first-party support.
 - CI runs `cargo audit` and `cargo deny`, and Dependabot is configured for weekly Cargo and GitHub Actions updates.
-- Review [publishing-checklist.md](publishing-checklist.md) and [../SECURITY.md](../SECURITY.md) before every release.
+- Review [publishing-checklist.md](publishing-checklist.md) and [`SECURITY.md`](https://github.com/DiplomaCoder-cmyk/vantus/blob/main/SECURITY.md) before every release.
 - Suggested dependency remediation policy:
   - critical advisories: patch immediately
   - high severity: patch within 7 days
