@@ -1,0 +1,9 @@
+error: handlers may declare at most one body extractor
+  --> tests/ui/multiple_body_extractors.rs:14:5
+   |
+14 | /     fn bad(
+15 | |         &self,
+16 | |         _text: vantus::TextBody,
+17 | |         _json: vantus::JsonBody<Payload>,
+18 | |     ) -> vantus::Response {
+   | |_________________________^

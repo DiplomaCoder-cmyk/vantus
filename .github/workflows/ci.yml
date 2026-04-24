@@ -1,0 +1,118 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_TARGET_DIR: target_ci
+
+jobs:
+  checks:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo artifacts
+        uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: ci-${{ matrix.os }}
+          cache-targets: true
+
+      - name: Format
+        run: cargo fmt --check
+
+      - name: Test
+        run: cargo test --lib --tests
+
+      - name: Doc tests
+        run: cargo test --doc
+
+      - name: Examples
+        run: cargo test --examples --no-run
+
+      - name: Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      - name: Docs
+        run: cargo doc --no-deps
+
+  msrv:
+    runs-on: ubuntu-latest
+    env:
+      CARGO_TARGET_DIR: target_msrv
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@1.85.0
+
+      - name: Check MSRV build
+        run: cargo check --all-targets --all-features
+
+  release:
+    runs-on: ubuntu-latest
+    env:
+      CARGO_TARGET_DIR: target_release
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo artifacts
+        uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: release
+          cache-targets: true
+
+      - name: Package list
+        run: cargo package --allow-dirty --list > package-list.txt
+
+      - name: Verify package list is release-safe
+        run: |
+          ! grep -q "target_doc_plan" package-list.txt
+          ! grep -q "target_examples" package-list.txt
+          ! grep -q "examples/demo_app" package-list.txt
+          ! grep -q "examples/html" package-list.txt
+          ! grep -q "src/di_container.rs" package-list.txt
+          ! grep -q "tests/macros.rs" package-list.txt
+          ! grep -q "tests/module.rs" package-list.txt
+
+      - name: Publish dry run macros
+        run: cargo publish -p vantus_macros --dry-run
+
+      - name: Publish dry run framework
+        run: cargo publish -p vantus --dry-run --allow-dirty
+
+      - name: Enforce package size budget
+        run: |
+          crate_size=$(stat -c%s "target_release/package/vantus-0.3.0.crate")
+          test "$crate_size" -lt 9000000
+
+  security:
+    runs-on: ubuntu-latest
+    env:
+      CARGO_TARGET_DIR: target_audit
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Install audit tools
+        run: cargo install cargo-audit cargo-deny --locked
+
+      - name: Cargo audit
+        run: cargo audit
+
+      - name: Cargo deny
+        run: cargo deny check

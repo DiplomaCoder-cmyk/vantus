@@ -1,0 +1,5 @@
+error: GET, HEAD, and OPTIONS handlers may not declare body extractors
+ --> tests/ui/body_extractor_on_get.rs:9:5
+  |
+9 |     fn bad(&self, _body: vantus::TextBody) -> vantus::Response {
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

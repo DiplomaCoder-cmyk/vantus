@@ -1,0 +1,5 @@
+error: unsupported handler parameter type; use request-derived extractors such as RequestContext, Path<T>, Query<T>, Header<T>, QueryMap, BodyBytes, TextBody, JsonBody<T>, RequestState<T>, or IdentityState<T>
+  --> tests/ui/service_parameter_removed.rs:13:21
+   |
+13 |         _generator: Service<std::sync::Arc<dyn vantus::IdGenerator>>,
+   |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

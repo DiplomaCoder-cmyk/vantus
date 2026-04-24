@@ -1,0 +1,17 @@
+# --- Rust Specific ---
+/target*/
+**/*.rs.bk
+Cargo.lock
+
+# --- IDEs / Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS Specific ---
+.DS_Store
+Thumbs.db
+
+# --- Vantus Specific ---
+wip/

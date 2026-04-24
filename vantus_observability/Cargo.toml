@@ -1,0 +1,18 @@
+[package]
+name = "vantus_observability"
+version = "0.3.0"
+edition = "2024"
+rust-version = "1.85"
+description = "First-party observability and operations module crate for Vantus."
+license = "Apache-2.0"
+publish = true
+homepage = "https://github.com/DiplomaCoder-cmyk/vantus"
+documentation = "https://docs.rs/vantus"
+repository = "https://github.com/DiplomaCoder-cmyk/vantus.git"
+
+[dependencies]
+async-trait = "0.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["sync", "time"] }
+vantus = {version = "0.3.0", path = ".." }

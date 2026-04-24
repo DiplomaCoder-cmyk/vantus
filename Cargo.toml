@@ -1,0 +1,110 @@
+[workspace]
+members = ["vantus_macros", "vantus_observability"]
+
+[package]
+name = "vantus"
+version = "0.3.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Macro-first async Rust backend framework with explicit composition, typed extraction, and hardened HTTP defaults."
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/DiplomaCoder-cmyk/vantus"
+documentation = "https://docs.rs/vantus"
+repository = "https://github.com/DiplomaCoder-cmyk/vantus.git"
+keywords = ["web", "framework", "macros", "async", "http"]
+categories = ["web-programming::http-server", "asynchronous"]
+include = [
+    "/Cargo.toml",
+    "/Cargo.lock",
+    "/README.md",
+    "/CHANGELOG.md",
+    "/SECURITY.md",
+    "/LICENSE",
+    "/deny.toml",
+    "/src/**",
+    "/docs/advanced-demo.md",
+    "/docs/cli-reference.md",
+    "/docs/configuration-reference.md",
+    "/docs/extraction-reference.md",
+    "/docs/migration-to-macros.md",
+    "/docs/publishing-checklist.md",
+    "/docs/production-notes.md",
+    "/docs/quick-start.md",
+    "/examples/cli.rs",
+    "/examples/main.rs",
+    "/examples/application.json",
+    "/examples/application.properties",
+    "/examples/application.toml",
+    "/benches/routing.rs",
+    "/tests/cli.rs",
+    "/tests/config.rs",
+    "/tests/http.rs",
+    "/tests/id_generator.rs",
+    "/tests/identity.rs",
+    "/tests/macros_hardening.rs",
+    "/tests/module_hardening.rs",
+    "/tests/observability.rs",
+    "/tests/properties.rs",
+    "/tests/router.rs",
+    "/tests/runtime_stress.rs",
+    "/tests/security.rs",
+    "/tests/ui/manual_api_removed.rs",
+    "/tests/ui/manual_api_removed.stderr",
+    "/tests/ui/service_parameter_removed.rs",
+    "/tests/ui/service_parameter_removed.stderr",
+    "/tests/ui/body_extractor_on_get.rs",
+    "/tests/ui/body_extractor_on_get.stderr",
+    "/tests/ui/multiple_body_extractors.rs",
+    "/tests/ui/multiple_body_extractors.stderr",
+    "/tests/ui/path_parameter_mismatch.rs",
+    "/tests/ui/path_parameter_mismatch.stderr",
+]
+
+
+
+[profile.release]
+lto = "fat"
+panic = "abort"
+
+
+[features]
+default = ["yaml-config"]
+yaml-config = ["dep:serde_yaml"]
+cli = ["dep:clap"]
+
+[dependencies]
+async-trait = "0.1"
+bytes = "1"
+dashmap = "6"
+futures-util = "0.3"
+http = "1"
+http-body-util = "0.1"
+hyper = { version = "1", features = ["http1", "http2", "server"] }
+hyper-util = { version = "0.1", features = ["server", "server-auto", "tokio"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "1"
+clap = { version = "4", features = ["derive"], optional = true }
+vantus_macros = { version = "0.3.0", path = "vantus_macros" }
+tokio = { version = "1", features = ["fs", "macros", "net", "rt-multi-thread", "sync", "time"] }
+tokio-util = "0.7"
+toml = "1.1.2"
+serde_yaml = { version = "0.9.34", optional = true }
+uuid = { version = "1", features = ["v4"] }
+matchit = "0.9.2"
+tracing = "0.1"
+
+[dev-dependencies]
+criterion = "0.5"
+proptest = "1"
+trybuild = "1"
+vantus_observability = { path = "vantus_observability" }
+
+[[bench]]
+name = "routing"
+harness = false
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

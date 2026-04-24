@@ -1,0 +1,5 @@
+error: path parameter `name` is not present in route template `/users/{id}`
+ --> tests/ui/path_parameter_mismatch.rs:9:26
+  |
+9 |     fn show(&self, name: vantus::Path<String>) -> vantus::Response {
+  |                          ^^^^^^^^^^^^^^^^^^^^
