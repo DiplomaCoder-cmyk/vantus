@@ -27,7 +27,9 @@ jobs:
         working-directory: docs
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 
 
       - uses: actions/configure-pages@v5
 
@@ -35,16 +37,15 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: docs/package-lock.json
 
       - name: Install docs dependencies
-        run: npm ci
+        run: npm install 
 
       - name: Build docs site
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_ACTIONS: "true"
-        run: npm run build
+        run: npm run docs:build 
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
