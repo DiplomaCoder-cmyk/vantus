@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/public/logo.png" alt="Vantus Framework logo" width="800">
+  <img src="docs/public/git_vantus_banner.png" alt="Vantus Framework banner" width="800">
 </p>
 
 # `vantus`
