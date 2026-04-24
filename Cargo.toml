@@ -84,7 +84,7 @@ hyper = { version = "1", features = ["http1", "http2", "server"] }
 hyper-util = { version = "0.1", features = ["server", "server-auto", "tokio"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-thiserror = "1"
+thiserror = "2"
 clap = { version = "4", features = ["derive"], optional = true }
 vantus_macros = { version = "0.3.0", path = "vantus_macros" }
 tokio = { version = "1", features = ["fs", "macros", "net", "rt-multi-thread", "sync", "time"] }
