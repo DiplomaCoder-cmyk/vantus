@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: Vantus
-  text: Explicit Rust Backend Composition
-  tagline: Macro-first routing, request-derived handler inputs, and hardened HTTP defaults without a runtime service locator.
+  text: Build Rust Backends With Fewer Hidden Rules
+  tagline: Macro-first routing, request-derived handler inputs, and hardened HTTP defaults without a runtime service locator or mystery dependency graph.
   image:
     src: /vantus-mark.svg
     alt: Vantus
@@ -34,11 +34,23 @@ features:
     details: The proc-macro crate generates route registration and extraction glue, but the runtime stays close to plain Rust traits and data structures.
 ---
 
-## What This Site Covers
+## Choose Your Track
 
-This documentation site was generated from a full read of the Vantus backend codebase, not just the public README. The architecture pages reflect how the framework actually composes modules, builds route indexes, threads request state, and executes middleware at runtime.
+- [Quick Start](/quick-start): Build a small service first and get comfortable with Vantus composition and request extraction.
+- [Technical Deep Dive](/technical-deep-dive): Inspect the request pipeline, route contracts, middleware ordering, and runtime behavior.
+- [Production Notes](/production-notes): Review the operational defaults, deployment boundaries, and safety guidance before shipping.
+
+This site was assembled from the actual Vantus source tree, not just the README. The goal is to make the framework legible from the outside: what you construct explicitly, what the macros generate, and what guarantees are enforced before handler code runs.
 
 If you are new to the project, start with [Quick Start](/quick-start). If you are evaluating the framework design, jump to [Technical Deep Dive](/technical-deep-dive). If you need a surface map of the public types and extension points, use [API Reference](/api-reference).
+
+## Why Teams Reach For Vantus
+
+- `Application wiring`: Build services with normal Rust constructors and mount them from `HostBuilder`.
+- `Handler signatures`: Keep them request-focused with `Path<T>`, `Query<T>`, `Header<T>`, `TextBody`, `JsonBody<T>`, and typed request state.
+- `Middleware behavior`: Run it in a deterministic stage order so auth, validation, recovery, and response shaping stay inspectable.
+- `Operational defaults`: Enforce limits, timeouts, contract checks, and secure headers before business logic.
+- `Macro usage`: Use proc macros for route registration ergonomics without hiding the runtime model.
 
 ## Architecture Snapshot
 
@@ -66,3 +78,10 @@ Incoming request
 - Routing and extraction rules are inferred from macro-decorated impl methods.
 - Middleware is powerful, but its ordering rules are stable and inspectable.
 - Operational behavior stays explicit: no surprise tracing subscriber, auth layer, or global container appears behind the scenes.
+
+## Reading Order
+
+1. [Quick Start](/quick-start) for the first runnable module.
+2. [API Reference](/api-reference) for the public surface area.
+3. [Technical Deep Dive](/technical-deep-dive) for internal behavior and design tradeoffs.
+4. [Production Notes](/production-notes) and [Publishing Checklist](/publishing-checklist) before shipping.
